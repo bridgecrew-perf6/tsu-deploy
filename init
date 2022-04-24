@@ -1,0 +1,4 @@
+<?php
+$db = new mysqli(getenv('db_host'), getenv('db_user'), getenv('db_pass'), getenv('db_name'), getenv('db_port'));
+$db->query("CREATE TABLE IF NOT EXISTS `records` (`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY, `value` varchar(1000), `state` varchar(20))");
+echo "init finished! (result not checked)";

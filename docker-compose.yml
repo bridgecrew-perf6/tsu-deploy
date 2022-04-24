@@ -1,0 +1,37 @@
+version: '2'
+
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+    - "80:80"
+    - "443:443"
+    volumes:
+    - ./configs/nginx:/etc/nginx/conf.d
+    - .:/var/www
+    - ./logs:/var/log/nginx
+    links:
+    - php
+  php:
+    build:
+      context: .
+      dockerfile: dockerfile
+    links:
+    - mysql
+    volumes:
+    - .:/var/www
+    env_file:
+    - ./configs/php/php.env
+    depends_on:
+    - mysql
+  mysql:
+    image: mysql:latest
+    ports:
+    - "3360:3306"
+    volumes:
+    - ./mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: tsudeploy
+      MYSQL_PASSWORD: deploytsu
+      MYSQL_DATABASE: tsudeploy
