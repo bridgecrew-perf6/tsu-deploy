@@ -18,6 +18,11 @@ services:
       dockerfile: dockerfile
     links:
     - mysql
+    healthcheck:
+      test: curl -sS localhost/health || echo 1
+      interval: 5s
+      timeout: 10s
+      retries: 3
     volumes:
     - .:/var/www
     env_file:

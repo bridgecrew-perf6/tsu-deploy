@@ -1,1 +1,1 @@
-docker-compose build
+COMMIT_HASH=$(git log -1 --format=%h) && TIMESTAMP=$(date +%s) && docker-compose build --build-arg COMMIT_HASH=$COMMIT_HASH --build-arg TIMESTAMP=$TIMESTAMP
