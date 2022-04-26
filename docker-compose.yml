@@ -19,7 +19,7 @@ services:
     links:
     - mysql
     healthcheck:
-      test: curl -sS localhost/health || echo 1
+      test: curl -sS http://localhost/health || echo 1
       interval: 5s
       timeout: 10s
       retries: 3
